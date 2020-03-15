@@ -15,7 +15,7 @@ $income = $api->accounting_income->get($where)[0];
 
 $meta = ($api->params->meta) ? $api->params->meta : "";
 
-$api->accounting_income->add(array(
+$api->accounting_income->create(array(
 	"value" => $api->params->value,
 	"last_value" => $income->current_value,
 	"current_value" => ( $income->current_value + $api->params->value ),
