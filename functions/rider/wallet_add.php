@@ -31,11 +31,12 @@ $api->accounting_income->create(array(
 ));
 
 $balance = $wallet->close_balance + $api->params->value;
+$receipt_id = $api->accounting_income->last();
 
 $add = array(
 	"provider_id" => $api->params->id,
-	"transaction_id" => $api->accounting_income->last() ,
-	"transaction_alias" => "ACCOUNT_LOAD",
+	"transaction_id" => $receipt_id,
+	"transaction_alias" => "ACCOUNT_LOAD" . $receipt_id,
 	"transaction_desc" => "Load from Main Office",
 	"type" => "C" ,
 	"amount" => $api->params->value,
