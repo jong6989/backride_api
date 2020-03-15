@@ -45,7 +45,7 @@ $add = array(
 
 $api->provider_wallet->create($add);
 
-$api->out( "Added!" );
+$api->out( "Added!" . $api->provider_wallet->last() );
 
 
 
