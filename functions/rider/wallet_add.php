@@ -34,7 +34,7 @@ $add = array(
 	"provider_id" => $api->params->id,
 	"transaction_id" => $api->accounting_income->last() ,
 	"transaction_alias" => "ACCOUNTING_CASH",
-	"type" => "A" ,
+	"type" => "C" ,
 	"amount" => $api->params->value,
 	"open_balance" => $wallet->close_balance,
 	"close_balance" => ( $wallet->close_balance + $api->params->value ),
@@ -45,7 +45,7 @@ $add = array(
 
 $api->provider_wallet->create($add);
 
-$api->out( "Added!" . $api->provider_wallet->last() );
+$api->out( "Added! id:" . $api->provider_wallet->last() );
 
 
 
