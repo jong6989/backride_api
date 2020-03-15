@@ -11,14 +11,21 @@ $where = array("provider_id"=>$api->params->id);
 if(!$api->provider_wallet->exist($where)) $api->out( "",0,"Rider Not Found!" );
 
 $wallet = $api->provider_wallet->get($where)[0];
-$income = $api->accounting_income->get($where)[0];
+$last_v = 0;
+$current_v = $api->params->value;
 
-$meta = ($api->params->meta) ? $api->params->meta : "";
+if( $api->accounting_income->count() > 0 ){
+	$income = $api->accounting_income->get($where)[0];
+	$last_v = $income->current_value;
+	$current_v = ( $income->current_value + $api->params->value );
+}
+
+$meta = (isset($api->params->meta)) ? $api->params->meta : "";
 
 $api->accounting_income->create(array(
 	"value" => $api->params->value,
-	"last_value" => $income->current_value,
-	"current_value" => ( $income->current_value + $api->params->value ),
+	"last_value" => $last_v,
+	"current_value" => $current_v,
 	"meta" => $meta,
 	"date" => date("Y-m-d H:i:s")
 ));
