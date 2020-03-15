@@ -30,20 +30,25 @@ $api->accounting_income->create(array(
 	"date" => date("Y-m-d H:i:s")
 ));
 
+$balance = $wallet->close_balance + $api->params->value;
+
 $add = array(
 	"provider_id" => $api->params->id,
 	"transaction_id" => $api->accounting_income->last() ,
-	"transaction_alias" => "ACCOUNTING_CASH",
+	"transaction_alias" => "ACCOUNT_LOAD",
+	"transaction_desc" => "Load from Main Office",
 	"type" => "C" ,
 	"amount" => $api->params->value,
 	"open_balance" => $wallet->close_balance,
-	"close_balance" => ( $wallet->close_balance + $api->params->value ),
+	"close_balance" => $balance,
 	"payment_mode" => "OFFICE_CASH",
 	"created_at" => date("Y-m-d H:i:s"),
 	"updated_at" => date("Y-m-d H:i:s"),
 );
 
 $api->provider_wallet->create($add);
+
+$api->providers->update(array("wallet_balance"=>$balance),array("id"=>$api->params->id))
 
 $api->out( "Added! id:" . $api->provider_wallet->last() );
 
