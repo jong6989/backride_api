@@ -48,7 +48,7 @@ $add = array(
 
 $api->provider_wallet->create($add);
 
-$api->providers->update(array("wallet_balance"=>$balance),array("id"=>$api->params->id))
+$api->providers->update(array("wallet_balance"=>$balance),array("id"=>$api->params->id));
 
 $api->out( "Added! id:" . $api->provider_wallet->last() );
 
