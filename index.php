@@ -29,8 +29,6 @@ require("settings.php");
 require("JongDb.php");
 require("api.php");
 
-include 'includes/PasswordHash.php';
-
 $api = new api();
 $api->params = new _($params);
 
