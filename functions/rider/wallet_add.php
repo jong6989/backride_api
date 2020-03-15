@@ -15,7 +15,7 @@ $last_v = 0;
 $current_v = $api->params->value;
 
 if( $api->accounting_income->count() > 0 ){
-	$income = $api->accounting_income->get($where)[0];
+	$income = $api->accounting_income->get()[0];
 	$last_v = $income->current_value;
 	$current_v = ( $income->current_value + $api->params->value );
 }
