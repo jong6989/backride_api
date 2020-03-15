@@ -43,6 +43,8 @@ $add = array(
 	"updated_at" => date("Y-m-d H:i:s"),
 );
 
+$api->provider_wallet->create($add);
+
 $api->out( "Added!" );
 
 
